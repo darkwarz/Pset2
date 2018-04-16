@@ -1,102 +1,69 @@
 #include <stdio.h>
-#include <string.h>
 #include <cs50.h>
+#include <string.h>
 #include <ctype.h>
+#include <stdlib.h>
 
-char caesar(char token, int key);
-
-int main(int argc, string argv[]) {
-
-    // Variable declarations
-    bool keySuccessful = false;
-    string keyword = "";
-    int keylength = 0;
-    string user_text = "";
-    int user_text_length;
-    int key_count = 0;
-
-    do
-    {
-        // arguments not 2
-        if(argc != 2)
-        {
-            printf("You didn't enter the correct number of keywords.\n");
-            return 1;
-        }
-        else if(argv[1])
-        {
-            int length = strlen(argv[1]);
-            for(int i = 0; i < length; i++)
-            {
-                if(!isalpha(argv[1][i]))
-                {
-                    // We accept only letters as input.
-                    printf("Your input contains characters that should not be used.\n");
-                    return 1;
-                }
-                else
-                {
-                    // input can be accepted as key.
-                    keySuccessful = true;
-                    keyword = argv[1];
-                }
-            }
-        }
-    } while(!keySuccessful);
-
-    // Check for the length of the keyword and define an array with that length.
-    keylength = strlen(keyword);
-    int keycodes[keylength];
-
-    // The letters in the keyword array should be converted to numbers
-    // starting from A = 0 to Z = 25 ignoring case.
-    for(int i = 0; i < keylength;i++)
-    {
-        keycodes[i] = toupper(keyword[i]) - 65;
-    }
-
-    // Read in user text and calculate its length.
-    user_text = get_string();
-    user_text_length = strlen(user_text);
-
-    for (int i = 0; i < user_text_length; i++)
-    {
-        // If input at given position is not letter, look like it
-        if(!isalpha(user_text[i]))
-        {
-            printf("%c", user_text[i]);
-        }
-        // Process input.
-        else
-        {
-            printf("%c", caesar(user_text[i], keycodes[key_count]));
-
-            // Increase the position counter for the keycode array.
-            if(key_count < keylength - 1)
-            {
-                key_count++;
-            }
-            else
-            {
-                key_count = 0;
-            }
-        }
-    }
-
-
-    printf("\n");
-    return 0;
-}
-
-//case sensative keys
-char caesar(char token, int key)
+//By: Jabier Espinal 4-16-2018
+int main(int argc, string argv[])
 {
-    if(islower(token))
+
+    string input; // string variable user input
+
+    if (argc != 2) // specified number of arguments not 2
     {
-        return ((((token - 97)+key)%26)+97);
+        printf("Caesar would not approve what you typed in, do it again!!\n"); // prompt user to enter key
+        return 1;
     }
+
+    int key = atoi(argv[1]); // store user key number
+
+    if (key < 0 || isalpha(*argv[1])) // if less then 0 or not a number print below message
+    {
+        printf("You know what you did wrong, Caesar would not approve\n");
+        return 1;
+    }
+
     else
     {
-        return ((((token - 65)  +key)%26)+65);
+
+        input = get_string("plaintext: "); // Prompt user for input
+        printf("ciphertext: ");
+        char cipher;
+
+        for (int i = 0, n = strlen(input); i < n; i++)  // checks for string length input
+        {
+            cipher = input[i];
+
+            if islower(input[i])  // checks for lower case
+            {
+                cipher = (((input[i] + key) - 97) % 26) + 97;
+            }
+
+            if isupper(input[i]) // checks for uppercase
+
+            {
+                cipher = (((input[i] + key) - 65) % 26) + 65;
+            }
+
+            if (isalpha(input[i])) // checks for string values
+
+            {
+                input[i] = cipher;
+            }
+
+            else // just prints cipher
+
+            {
+                input[i] = cipher;
+            }
+
+            printf("%c", cipher);
+        }
+
+        printf("\n");
+        return 0;
+
     }
+
 }
