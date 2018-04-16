@@ -4,12 +4,13 @@
 #include <ctype.h>
 #include <stdlib.h>
 
+//By: Jabier Espinal 4-16-2018
 int main(int argc, string argv[])
 {
 
-    string input; // string variable input
+    string input; // string variable user input
 
-    if (argc != 2) // specified number of arguments
+    if (argc != 2) // specified number of arguments not 2
     {
         printf("Ceaser would not approve\n"); // prompt user to enter key
         return 1;
@@ -17,17 +18,17 @@ int main(int argc, string argv[])
 
     int key = atoi(argv[1]); // store user key number
 
-    if (key < 0) // check if not negative
-    {
-        printf("If you know whats right, try again\n");
-        return 1;
-    }
+    // if (key < 0) // check if not negative
+    // {
+    //     printf("If you know whats right, try again\n");
+    //     return 1;
+    // }
 
-    else
+    // else
     {
 
-        input = get_string("Enter a message to encrypt: "); // Prompt user for input
-        printf("ceaserCipherText: ");
+            input = get_string("Enter a message to encrypt: "); // Prompt user for input
+        printf("ciphertext: ");
 
         for (int i = 0, n = strlen(input); i < n; i++)
         {
@@ -53,6 +54,7 @@ int main(int argc, string argv[])
 
             else
             {
+                input[i] = cipher;
                 printf("%c", cipher);
             }
 

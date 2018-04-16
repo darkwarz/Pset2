@@ -36,7 +36,7 @@ int main(int argc, string argv[]) {
                 }
                 else
                 {
-                    // All good, input can be accepted as key.
+                    // input can be accepted as key.
                     keySuccessful = true;
                     keyword = argv[1];
                 }
@@ -44,7 +44,7 @@ int main(int argc, string argv[]) {
         }
     } while(!keySuccessful);
 
-    // We check for the length of the keyword and define an array with that length.
+    // Check for the length of the keyword and define an array with that length.
     keylength = strlen(keyword);
     int keycodes[keylength];
 
