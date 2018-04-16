@@ -12,52 +12,53 @@ int main(int argc, string argv[])
 
     if (argc != 2) // specified number of arguments not 2
     {
-        printf("Ceaser would not approve\n"); // prompt user to enter key
+        printf("Caesar would not approve what you typed in, do it again!!\n"); // prompt user to enter key
         return 1;
     }
 
     int key = atoi(argv[1]); // store user key number
 
-    // if (key < 0) // check if not negative
-    // {
-    //     printf("If you know whats right, try again\n");
-    //     return 1;
-    // }
+    if (key < 0 || isalpha(*argv[1])) // if less then 0 or not a number print below message
+    {
+        printf("You know what you did wrong, Caesar would not approve\n");
+        return 1;
+    }
 
-    // else
+    else
     {
 
-            input = get_string("Enter a message to encrypt: "); // Prompt user for input
+        input = get_string("plaintext: "); // Prompt user for input
         printf("ciphertext: ");
+        char cipher;
 
-        for (int i = 0, n = strlen(input); i < n; i++)
+        for (int i = 0, n = strlen(input); i < n; i++)  // checks for string length input
         {
-            char cipher = input[i];
-            //check if the letter is uppercase or lowercase then convert
+            cipher = input[i];
 
-            if islower(input[i])
+            if islower(input[i])  // checks for lower case
             {
                 cipher = (((input[i] + key) - 97) % 26) + 97;
             }
 
-            if isupper(input[i])
+            if isupper(input[i]) // checks for uppercase
+
             {
                 cipher = (((input[i] + key) - 65) % 26) + 65;
             }
 
-            //if neither then just print whats left
-            if (isalpha(input[i]))
+            if (isalpha(input[i])) // checks for string values
+
             {
                 input[i] = cipher;
-                printf("%c", cipher);
             }
 
-            else
+            else // just prints cipher
+
             {
                 input[i] = cipher;
-                printf("%c", cipher);
             }
 
+            printf("%c", cipher);
         }
 
         printf("\n");
