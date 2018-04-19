@@ -9,75 +9,68 @@
 int main(int argc, string argv[])
 {
 
-    string input; // string variable user input
+    // string input; // string variable user input
 
     if (argc != 2) // specified number of arguments not 2
     {
-        printf("Caesar would not approve what you typed in, do it again!!\n"); // prompt user to enter key
+        printf("Error: Please provide keyword\n"); // prompt user to enter key
         return 1;
     }
 
-    string keyword = argv[1]); // store user key word
+    string keyword = argv[1]; // store user key word
 
     for (int i = 0; i < strlen(keyword); i++) // if not a keyword alphabetic reject keyword
     {
-        if (!alpha(keyword[i]))
+        if (!isalpha(keyword[i]))
         {
-        printf("Error: Keyword must only contain alphabetic characters\n");
-        return 1;
+            printf("Error: Keyword must only contain alpha characters\n");
+            return 1;
         }
     }
-    else
+
+    string input = get_string("plaintext: "); // Prompt user for input
+
+    int j = 0; // variable j to
+
+
+
+    for (int i = 0; i < strlen(input); i++)  // goes through user provided string converting alpha characters
     {
-
-        string input = get_string("plaintext: "); // Prompt user for input
-        printf("ciphertext: ");
-        char cipher;
-        int j = 0;
-
-
-        for (int i = 0, n = strlen(input); i < n; i++)  // checks for string length input
+        if (isalpha(input[i])) // ciphers only alpha charectors
         {
-            cipher = input[i];
+            int vigenere = j % strlen(keyword);
 
-            if (isalpha(input[i])) // checks for string values
-
+            if (islower(input[i]))  // lower case
             {
-                int vige = j % strlen(keyword);
-            }
+                keyword[vigenere] = tolower(keyword[vigenere]);
 
-            if islower(input[i])  // checks for lower case
-            {
-                keyword[vige] = toLower(keyword[vige]);
-
-            if (cipher + ((keyword[vige]) - 'a') > 'z')
-            {
-                cipher = ('a' - 1) + ((cipher + (keyword[vige] - 'a')) % 'z');
-            }
-
-            else
-             {
-                 cipher += (keyword[vige] - 'a');
-             }
-        }
-
-            else
-            {
-                keyword[vige] = toupper(keyword[vige]);
-
-                if (cipher + (keyword[vige] - 'A') > 'Z')
+                if (input[i] + ((keyword[vigenere]) - 'a') > 'z')
                 {
-                    cipher = ('A' -1) + ((cipher + (keyword[vige] - 'A')) % 'Z');
+                    input[i] = ('a' - 1) + ((input[i] + (keyword[vigenere] - 'a')) % 'z');
                 }
 
                 else
                 {
-                    cipher += (keyword[vige] - 'A');
+                    input[i] += (keyword[vigenere] - 'a');
                 }
             }
 
-            j++;
+            else
+            {
+                keyword[vigenere] = toupper(keyword[vigenere]);
+
+                if (input[i] + (keyword[vigenere] - 'A') > 'Z')
+                {
+                    input[i] = ('A' - 1) + ((input[i] + (keyword[vigenere] - 'A')) % 'Z');
+                }
+
+                else
+                {
+                    input[i] += (keyword[vigenere] - 'A');
                 }
             }
-            printf("ciphertext: %s\n, input);
+            j++;
+        }
     }
+    printf("ciphertext: %s\n", input);
+}
