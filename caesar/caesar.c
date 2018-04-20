@@ -1,3 +1,8 @@
+
+//your formula to shift a character by the key value seems interesting. I learnt something new.
+//you could have nested the if condition of isalpha right above the if condition of isUpper and islower. This is just a suggestion.
+//also instead of harcoding the values of 97 or 65 you can use 'A'or 'a' in lines 45 and 51.
+//style looks good
 #include <stdio.h>
 #include <cs50.h>
 #include <string.h>

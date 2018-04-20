@@ -1,3 +1,6 @@
+//style looks good
+//instead of using magic numbers like 32, you could use ' ' which represents char space.
+
 #include <stdio.h> // contains printf() , stdin function
 #include <cs50.h>
 #include <string.h> // contains the strLen() function

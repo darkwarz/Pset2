@@ -1,3 +1,6 @@
+//style looks good
+// technique used to add key and then bringing back to range (a-z or A-Z) can probably be improved by
+// first doing a mod 26 and adding a or A to the result
 #include <stdio.h>
 #include <cs50.h>
 #include <string.h>
